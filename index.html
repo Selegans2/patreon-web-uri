@@ -13,6 +13,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      overflow: hidden;
     }
 
     .ticket-card {
@@ -68,6 +69,26 @@
       color: #777;
     }
 
+    .copy-toast {
+      position: absolute;
+      bottom: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #77BEF0;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s ease;
+    }
+
+    .copy-toast.show {
+      bottom: -20px;
+      opacity: 1;
+    }
+
     @media (max-width: 500px) {
       .ticket-card {
         padding: 20px;
@@ -85,22 +106,44 @@
     <div class="emoji">🎉</div>
     <h1>Thank you!</h1>
     <p>Your code has been generated successfully</p>
-    <code id="auth-code" onclick="selectCode()">Loading...</code>
-    <div class="note">Click the code to auto-select it</div>
+    <code id="auth-code" onclick="copyCode()">Loading...</code>
+    <div class="note">Click the code to auto-copy it</div>
+    <div id="toast" class="copy-toast">📄 Copied!</div>
   </div>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
     const codeEl = document.getElementById('auth-code');
+    const toastEl = document.getElementById('toast');
+
     codeEl.textContent = code || 'No code found';
 
-    function selectCode() {
+    function copyCode() {
+      // Select the code
       const range = document.createRange();
       range.selectNodeContents(codeEl);
       const selection = window.getSelection();
       selection.removeAllRanges();
       selection.addRange(range);
+
+      // Try to copy
+      try {
+        document.execCommand('copy');
+        showToast();
+      } catch (err) {
+        console.error('Copy failed', err);
+      }
+
+      // Cleanup selection
+      selection.removeAllRanges();
+    }
+
+    function showToast() {
+      toastEl.classList.add('show');
+      setTimeout(() => {
+        toastEl.classList.remove('show');
+      }, 2000);
     }
   </script>
 </body>
