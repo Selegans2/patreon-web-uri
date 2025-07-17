@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patreon Link Complete</title>
+</head>
+<body>
+    <h1>Almost Done!</h1>
+    <p>Copy this code and paste it into your game:</p>
+    <code id="auth-code"></code>
+    
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        document.getElementById('auth-code').textContent = code || 'No code found';
+    </script>
+</body>
+</html>
