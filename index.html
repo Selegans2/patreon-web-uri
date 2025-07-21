@@ -29,17 +29,31 @@
       border-radius: 20px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-end;
       padding: 40px;
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-      max-width: 850px;
-      width: 90%;
+      max-width: 1000px;
+      width: 95%;
       position: relative;
       z-index: 1;
     }
 
+    .character-img {
+      width: 560px;
+      height: auto;
+      flex-shrink: 0;
+      user-select: none;
+      display: block;
+      margin-bottom: -40px; /* remove space below image */
+      line-height: 0;
+      vertical-align: bottom; /* align exactly with card bottom */
+    }
+
     .text-content {
       max-width: 55%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .headline {
@@ -68,6 +82,7 @@
       cursor: pointer;
       border: 3px solid #f7941d;
       transition: all 0.3s ease;
+      user-select: text;
     }
 
     #auth-code:hover {
@@ -82,9 +97,27 @@
       font-weight: 500;
     }
 
-    .character-img {
-      width: 280px; /* Increased size */
-      height: auto;
+    .instructions {
+      margin-top: 0px;
+      color: #333;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .instructions h3 {
+      margin-bottom: 12px;
+      font-size: 20px;
+      color: #f37021;
+    }
+
+    .instructions ol {
+      padding-left: 0;
+      list-style: none; /* removes automatic numbers */
+      margin: 0;
+    }
+
+    .instructions li {
+      margin-bottom: 10px;
     }
 
     .copy-toast {
@@ -114,17 +147,27 @@
 
   <!-- Main card -->
   <div class="card">
-    <div class="text-content">
-      <div class="headline">A SANDWICH SCENTED<br><span style="color: #f37021;">DREAM</span></div>
-      <div class="subhead">Your authorization code is served hot and fresh:</div>
-      <code id="auth-code" onclick="copyCode()">Loading...</code>
-      <div class="note">Click to copy your code</div>
-    </div>
     <img
       class="character-img"
       src="https://raw.githubusercontent.com/Selegans2/patreon-web-uri/main/CharacterMascot.png"
       alt="Mascot Image"
     />
+    <div class="text-content">
+      <div class="headline">A SANDWICH SCENTED<br><span style="color: #f37021;">DREAM</span></div>
+      <div class="subhead">Your authorization code is served hot and fresh:</div>
+      <code id="auth-code" onclick="copyCode()">Loading...</code>
+      <div class="note">Click to copy your code</div>
+
+      <!-- Instruction steps -->
+      <div class="instructions">
+        <h3>How to use your code:</h3>
+        <ol>
+          <li><strong>Step 1:</strong> Paste the code where prompted.</li>
+          <li><strong>Step 2:</strong> Your player account will be linked automatically.</li>
+          <li><strong>Step 3:</strong> Open your in-game inventory to view your rewards.</li>
+        </ol>
+      </div>
+    </div>
     <div id="toast" class="copy-toast">📋 Copied!</div>
   </div>
 
