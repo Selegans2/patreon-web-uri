@@ -21,6 +21,7 @@
       align-items: center;
       height: 100vh;
       overflow: hidden;
+      position: relative;
     }
 
     .card {
@@ -34,6 +35,7 @@
       max-width: 850px;
       width: 90%;
       position: relative;
+      z-index: 1;
     }
 
     .text-content {
@@ -74,13 +76,14 @@
     }
 
     .note {
-      margin-top: 10px;
-      font-size: 12px;
-      color: #666;
+      margin-top: 14px;
+      font-size: 15px;
+      color: #444;
+      font-weight: 500;
     }
 
     .character-img {
-      width: 200px;
+      width: 280px; /* Increased size */
       height: auto;
     }
 
@@ -88,15 +91,17 @@
       position: fixed;
       top: 20px;
       right: 20px;
-      background: #06d6a0;
+      background: #f37021;
       color: #fff;
-      padding: 10px 20px;
-      border-radius: 8px;
+      padding: 14px 24px;
+      border-radius: 10px;
       font-weight: bold;
+      font-size: 18px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       opacity: 0;
       transform: translateX(100%);
       transition: all 0.3s ease;
-      z-index: 999;
+      z-index: 1000;
     }
 
     .copy-toast.show {
@@ -106,6 +111,8 @@
   </style>
 </head>
 <body>
+
+  <!-- Main card -->
   <div class="card">
     <div class="text-content">
       <div class="headline">A SANDWICH SCENTED<br><span style="color: #f37021;">DREAM</span></div>
@@ -113,7 +120,11 @@
       <code id="auth-code" onclick="copyCode()">Loading...</code>
       <div class="note">Click to copy your code</div>
     </div>
-    <img class="character-img" src="your-character-image.png" alt="Mascot Image" />
+    <img
+      class="character-img"
+      src="https://raw.githubusercontent.com/Selegans2/patreon-web-uri/main/logo_placeholder.png"
+      alt="Mascot Image"
+    />
     <div id="toast" class="copy-toast">📋 Copied!</div>
   </div>
 
